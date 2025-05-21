@@ -13,6 +13,7 @@ MainWindow::MainWindow() {
     todoInput |= CatchEvent([&] (const Event &e) { return handleTodoInputEvent(e); });
 
     auto component = Container::Stacked({
+        tabToggle,
         todoInput,
     });
 
@@ -20,11 +21,12 @@ MainWindow::MainWindow() {
 }
 
 void MainWindow::show() {
+    todoInput->TakeFocus();
     screen.Loop(renderer);
 }
 
 Table MainWindow::buildTable() {
-    auto table = Table(ServiceContainer::todoService->getTodoTable());
+    auto table = Table(ServiceContainer::todoService->getTodoTable(daySelected));
     table.SelectRow(0).Decorate(bold);
     table.SelectRow(0).SeparatorVertical(LIGHT);
     table.SelectRow(0).Border(DOUBLE);
@@ -43,6 +45,8 @@ Element MainWindow::refreshWindow() {
     auto table = buildTable();
 
     return window(text("TODO-Board"), vbox({
+        tabToggle->Render(),
+        separator(),
         hbox(table.Render())| flex,
         hbox(text("Todo: "), todoInput->Render()),
     }));
@@ -50,10 +54,10 @@ Element MainWindow::refreshWindow() {
 
 bool MainWindow::handleTodoInputEvent(const Event &event) {
     if (event == Event::Return) {
-        CommandProcessor commandProcessor{textInput};
+        CommandProcessor commandProcessor{textInput, daySelected};
 
         if (! commandProcessor.isCommand()) {
-            ServiceContainer::todoService->addTodo(textInput);
+            ServiceContainer::todoService->addTodo(textInput, daySelected);
         } else {
             commandProcessor.processCommand();
         }

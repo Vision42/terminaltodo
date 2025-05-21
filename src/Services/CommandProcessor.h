@@ -8,17 +8,18 @@
 #include <sstream>
 #include <vector>
 
-
+#include "ServiceContainer.h"
 
 class CommandProcessor {
 public:
     CommandProcessor();
-    CommandProcessor(const std::string &command);
+    CommandProcessor(const std::string &command, int day);
 
     bool isCommand();
     void processCommand();
 
 private:
+    int day{};
     std::string command;
     std::vector<std::string> tokens;
 

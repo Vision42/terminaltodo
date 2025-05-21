@@ -26,8 +26,11 @@ private:
     ftxui::ScreenInteractive screen = ftxui::ScreenInteractive::Fullscreen();
 
     std::string textInput;
+    int daySelected = 0;
+    std::vector<std::string> tabValues{"Monday", "Tuesday", "Wednesday", "Thursday", "Friday"};
 
     ftxui::Component todoInput = ftxui::Input(&textInput, "TODO");
+    ftxui::Component tabToggle = ftxui::Toggle(&tabValues, &daySelected);
 
     ftxui::Table buildTable();
     ftxui::Element refreshWindow();

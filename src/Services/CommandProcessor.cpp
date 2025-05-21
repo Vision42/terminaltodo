@@ -4,12 +4,11 @@
 
 #include "CommandProcessor.h"
 
-#include "ServiceContainer.h"
-
 CommandProcessor::CommandProcessor() = default;
 
-CommandProcessor::CommandProcessor(const std::string &command) {
+CommandProcessor::CommandProcessor(const std::string &command, int day) {
     this->command = command;
+    this->day = day;
 }
 
 bool CommandProcessor::isCommand() {
@@ -56,13 +55,13 @@ void CommandProcessor::processTokenizedCommand() {
 }
 
 void CommandProcessor::deleteTodo(int index) {
-    ServiceContainer::todoService->deleteTodo(index);
+    ServiceContainer::todoService->deleteTodo(index, day);
 }
 
 void CommandProcessor::checkTodo(int index) {
-    ServiceContainer::todoService->checkTodo(index);
+    ServiceContainer::todoService->checkTodo(index, day);
 }
 
 void CommandProcessor::uncheckTodo(int index) {
-    ServiceContainer::todoService->uncheckTodo(index);
+    ServiceContainer::todoService->uncheckTodo(index, day);
 }
