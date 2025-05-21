@@ -5,6 +5,7 @@
 #include "MainWindow.h"
 
 #include "ftxui/component/component_base.hpp"
+#include "Services/CommandProcessor.h"
 
 using namespace ftxui;
 
@@ -49,7 +50,14 @@ Element MainWindow::refreshWindow() {
 
 bool MainWindow::handleTodoInputEvent(const Event &event) {
     if (event == Event::Return) {
-        ServiceContainer::todoService->addTodo(textInput);
+        CommandProcessor commandProcessor{textInput};
+
+        if (! commandProcessor.isCommand()) {
+            ServiceContainer::todoService->addTodo(textInput);
+        } else {
+            commandProcessor.processCommand();
+        }
+
         textInput.clear();
         screen.PostEvent(Event::Custom);
 

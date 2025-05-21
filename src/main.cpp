@@ -1,5 +1,5 @@
 #include <iostream>
-#include "MainWindow.h"
+#include "UI/MainWindow.h"
 #include "ServiceContainer.h"
 
 int main() {

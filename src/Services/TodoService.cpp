@@ -15,6 +15,18 @@ void TodoService::addTodo(const std::string &content) {
     todos.push_back(element);
 }
 
+void TodoService::deleteTodo(int index) {
+    todos.erase(todos.begin() + index);
+}
+
+void TodoService::checkTodo(int index) {
+    todos[index].completed = true;
+}
+
+void TodoService::uncheckTodo(int index) {
+    todos[index].completed = false;
+}
+
 std::vector<std::vector<std::string>> TodoService::getTodoTable() {
     std::vector<std::vector<std::string>> table;
 
