@@ -11,6 +11,7 @@ using namespace ftxui;
 
 MainWindow::MainWindow() {
     todoInput |= CatchEvent([&] (const Event &e) { return handleTodoInputEvent(e); });
+    tabToggle |= CatchEvent([&] (const Event &e) { return handleTabInputEvent(e); });
 
     auto component = Container::Stacked({
         tabToggle,
@@ -63,6 +64,23 @@ bool MainWindow::handleTodoInputEvent(const Event &event) {
         }
 
         textInput.clear();
+        screen.PostEvent(Event::Custom);
+
+        return true;
+    }
+
+    if (event == Event::Tab) {
+        tabToggle->TakeFocus();
+
+        return true;
+    }
+
+    return false;
+}
+
+bool MainWindow::handleTabInputEvent(const Event &event) {
+    if (event == Event::Return) {
+        todoInput->TakeFocus();
         screen.PostEvent(Event::Custom);
 
         return true;

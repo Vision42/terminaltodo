@@ -35,6 +35,7 @@ private:
     ftxui::Table buildTable();
     ftxui::Element refreshWindow();
     bool handleTodoInputEvent(const ftxui::Event &event);
+    bool handleTabInputEvent(const ftxui::Event &event);
 };
 
 
