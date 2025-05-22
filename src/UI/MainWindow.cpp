@@ -27,7 +27,9 @@ void MainWindow::show() {
 }
 
 Table MainWindow::buildTable() {
-    auto table = Table(ServiceContainer::todoService->getTodoTable(daySelected));
+    auto tableData = ServiceContainer::todoService->getTodoTable(daySelected);
+
+    auto table = Table(tableData);
     table.SelectRow(0).Decorate(bold);
     table.SelectRow(0).SeparatorVertical(LIGHT);
     table.SelectRow(0).Border(DOUBLE);
@@ -38,6 +40,12 @@ Table MainWindow::buildTable() {
     content.DecorateCellsAlternateRow(color(Color::Blue), 3, 0);
     content.DecorateCellsAlternateRow(color(Color::Cyan), 3, 1);
     content.DecorateCellsAlternateRow(color(Color::White), 3, 2);
+
+    for (size_t i = 0; i < tableData.size(); i++) {
+        if (tableData[i][1] == "HIGH") {
+            table.SelectRow(static_cast<int>(i)).Decorate(bgcolor(Color::Red1));
+        }
+    }
 
     return table;
 }
