@@ -57,6 +57,11 @@ void CommandProcessor::processTokenizedCommand() {
 
     if (tokens[0] == ":prio") {
         setPrio(std::stoi(tokens[1]), std::stoi(tokens[2]));
+        return;
+    }
+
+    if (tokens[0] == ":save") {
+        save();
     }
 }
 
@@ -74,4 +79,8 @@ void CommandProcessor::uncheckTodo(int index) {
 
 void CommandProcessor::setPrio(int index, int prio) {
     ServiceContainer::todoService->setPrio(index, day, prio);
+}
+
+void CommandProcessor::save() {
+    ServiceContainer::todoService->save();
 }

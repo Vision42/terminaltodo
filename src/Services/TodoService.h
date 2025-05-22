@@ -21,6 +21,8 @@ public:
     void checkTodo(int index, int day);
     void uncheckTodo(int index, int day);
     void setPrio(int index, int day, int prio);
+    void save();
+    void load();
     std::vector<std::vector<std::string>> getTodoTable(int day);
 
     ~TodoService();

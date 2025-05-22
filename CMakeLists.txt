@@ -13,7 +13,9 @@ add_library(todo-lib
         src/Services/CommandProcessor.cpp
         src/Services/CommandProcessor.h
         src/DTO/TodoContainer.h
-        src/DTO/Priority.h)
+        src/DTO/Priority.h
+        src/Services/StorageService.cpp
+        src/Services/StorageService.h)
 target_include_directories(todo-lib PUBLIC src)
 
 include(FetchContent)

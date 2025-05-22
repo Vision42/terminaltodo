@@ -4,6 +4,8 @@
 
 #include "TodoService.h"
 
+#include "StorageService.h"
+
 TodoService::TodoService() {
     for (size_t i = 0; i < 5; i++) {
         todoContainers.emplace_back();
@@ -41,6 +43,16 @@ void TodoService::setPrio(int index, int day, int prio) {
     }
 
     todoContainers[day].elements[index].priority = label;
+}
+
+void TodoService::save() {
+    StorageService storage;
+    storage.storeData(todoContainers);
+}
+
+void TodoService::load() {
+    StorageService storage;
+    storage.loadData(todoContainers);
 }
 
 std::vector<std::vector<std::string>> TodoService::getTodoTable(int day) {
