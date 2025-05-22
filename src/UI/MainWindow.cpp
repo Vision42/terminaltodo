@@ -33,7 +33,7 @@ Table MainWindow::buildTable() {
     table.SelectRow(0).Decorate(bold);
     table.SelectRow(0).SeparatorVertical(LIGHT);
     table.SelectRow(0).Border(DOUBLE);
-    table.SelectColumn(2).DecorateCells(align_right);
+    table.SelectColumn(3).DecorateCells(align_right);
 
     auto content = table.SelectRows(1, -1);
     // Alternate in between 3 colors.
@@ -45,6 +45,14 @@ Table MainWindow::buildTable() {
         if (tableData[i][1] == "HIGH") {
             table.SelectRow(static_cast<int>(i)).Decorate(bgcolor(Color::Red1));
         }
+    }
+
+    auto terminal_width = Terminal::Size().dimx;
+    auto column_count = tableData[0].size();
+    auto col_width = terminal_width / column_count;
+
+    for (int col = 0; col < column_count; ++col) {
+        table.SelectColumn(col).DecorateCells(size(WIDTH, EQUAL, col_width));
     }
 
     return table;
