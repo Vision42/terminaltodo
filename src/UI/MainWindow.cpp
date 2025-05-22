@@ -6,6 +6,7 @@
 
 #include "HelpRenderer.h"
 #include "TodoRenderer.h"
+#include "DTO/WindowState.h"
 #include "ftxui/component/component_base.hpp"
 #include "Services/CommandProcessor.h"
 
@@ -20,11 +21,11 @@ void MainWindow::show(int window) {
     HelpRenderer helpRenderer(screen);
 
     switch (window) {
-        case 0:
+        case WindowState::TODO:
             ServiceContainer::windowStateHandler->setActiveWindow(window);
             screen.Loop(todoRenderer.getRenderer());
             break;
-        case 1:
+        case WindowState::HELP:
             ServiceContainer::windowStateHandler->setActiveWindow(window);
             screen.Loop(helpRenderer.getRenderer());
             break;
