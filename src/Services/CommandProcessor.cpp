@@ -4,6 +4,8 @@
 
 #include "CommandProcessor.h"
 
+#include <strings.h>
+
 CommandProcessor::CommandProcessor() = default;
 
 CommandProcessor::CommandProcessor(const std::string &command, int day) {
@@ -52,6 +54,10 @@ void CommandProcessor::processTokenizedCommand() {
         uncheckTodo(std::stoi(tokens[1]));
         return;
     }
+
+    if (tokens[0] == ":prio") {
+        setPrio(std::stoi(tokens[1]), std::stoi(tokens[2]));
+    }
 }
 
 void CommandProcessor::deleteTodo(int index) {
@@ -64,4 +70,8 @@ void CommandProcessor::checkTodo(int index) {
 
 void CommandProcessor::uncheckTodo(int index) {
     ServiceContainer::todoService->uncheckTodo(index, day);
+}
+
+void CommandProcessor::setPrio(int index, int prio) {
+    ServiceContainer::todoService->setPrio(index, day, prio);
 }

@@ -29,6 +29,7 @@ private:
     void deleteTodo(int index);
     void checkTodo(int index);
     void uncheckTodo(int index);
+    void setPrio(int index, int prio);
 };
 
 

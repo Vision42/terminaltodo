@@ -10,6 +10,7 @@
 
 #include "DTO/TodoContainer.h"
 #include "DTO/TODOElement.h"
+#include "DTO/Priority.h"
 
 class TodoService {
 public:
@@ -19,6 +20,7 @@ public:
     void deleteTodo(int index, int day);
     void checkTodo(int index, int day);
     void uncheckTodo(int index, int day);
+    void setPrio(int index, int day, int prio);
     std::vector<std::vector<std::string>> getTodoTable(int day);
 
     ~TodoService();

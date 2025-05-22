@@ -13,7 +13,7 @@ TodoService::TodoService() {
 void TodoService::addTodo(const std::string &content, int day) {
     TODOElement element;
     element.content = content;
-    element.priority = "none";
+    element.priority = "MEDIUM";
 
     todoContainers[day].elements.push_back(element);
 }
@@ -28,6 +28,19 @@ void TodoService::checkTodo(int index, int day) {
 
 void TodoService::uncheckTodo(int index, int day) {
     todoContainers[day].elements[index].completed = false;
+}
+
+void TodoService::setPrio(int index, int day, int prio) {
+    std::string label{};
+
+    switch (prio) {
+        case Priority::LOW: label = "LOW"; break;
+        case Priority::MEDIUM: label = "MEDIUM"; break;
+        case Priority::HIGH: label = "HIGH"; break;
+        default: label = "NONE"; break;
+    }
+
+    todoContainers[day].elements[index].priority = label;
 }
 
 std::vector<std::vector<std::string>> TodoService::getTodoTable(int day) {
