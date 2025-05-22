@@ -51,7 +51,7 @@ std::vector<std::vector<std::string>> TodoService::getTodoTable(int day) {
     for (size_t i = 0; i < todoContainers[day].elements.size(); i++) {
         auto [priority, content, completed] = todoContainers[day].elements[i];
         auto index = std::to_string(i);
-        table.push_back(std::vector{index, priority, content, static_cast<std::string>(completed ? "Y" : "x")});
+        table.push_back(std::vector{index, priority, content, static_cast<std::string>(completed ? "\u2705" : "\u274C")});
     }
 
     return table;
