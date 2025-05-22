@@ -8,7 +8,7 @@
 
 PomodoroRenderer::PomodoroRenderer(ScreenInteractive &screen): Renderer(screen) {
     auto component = Container::Stacked({
-
+            btnReset,
         });
 
     renderer = ftxui::Renderer(component , [&] { return refreshWindow(); });
@@ -20,6 +20,15 @@ Element PomodoroRenderer::refreshWindow() {
     }
 
     return window(text("TODO-Board | Pomodoro"), vbox({
-        hbox(paragraph("text")),
+        hbox(text("20:10") | bold | center | flex),
+        separator(),
+        hbox(gauge(0.5) | flex),
+        separator(),
+        hbox(text("Round: 4") | center | flex, text("Next pause: 5 min") | center | flex),
+        separator(),
+        hbox(btnReset->Render() | center| flex)
     }));
+}
+
+void PomodoroRenderer::resetTimer() {
 }

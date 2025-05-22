@@ -19,7 +19,12 @@ public:
     PomodoroRenderer(ScreenInteractive &screen);
 
 private:
+    Component btnReset = Button("Reset timer", [&] {
+        resetTimer();
+    });
+
     Element refreshWindow();
+    void resetTimer();
 };
 
 
