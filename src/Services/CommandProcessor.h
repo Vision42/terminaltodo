@@ -32,6 +32,7 @@ private:
     void setPrio(int index, int prio);
     void save();
     void help();
+    void clear();
 };
 
 

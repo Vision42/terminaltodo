@@ -31,6 +31,7 @@ private:
                            ":delete [ID] -> Deletes an todolist entry\n"
                            ":prio [ID] [Level 0 - 3] -> Sets the priority of an todolist entry\n"
                            ":save -> Saves the current todolist to disk\n"
+                           ":clear -> clears all todo entries\n"
                            ":help -> Opens this help page\n"
                            "\n"
                            "Leave this page with 'q'";

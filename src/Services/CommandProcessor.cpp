@@ -69,6 +69,11 @@ void CommandProcessor::processTokenizedCommand() {
 
     if (tokens[0] == ":help") {
         help();
+        return;
+    }
+
+    if (tokens[0] == ":clear") {
+        clear();
     }
 }
 
@@ -94,4 +99,8 @@ void CommandProcessor::save() {
 
 void CommandProcessor::help() {
     ServiceContainer::windowStateHandler->switchWindow(WindowState::HELP);
+}
+
+void CommandProcessor::clear() {
+    ServiceContainer::todoService->clear();
 }

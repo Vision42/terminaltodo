@@ -23,6 +23,7 @@ public:
     void setPrio(int index, int day, int prio);
     void save();
     void load();
+    void clear();
     std::vector<std::vector<std::string>> getTodoTable(int day);
 
     ~TodoService();

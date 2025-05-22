@@ -55,6 +55,18 @@ void TodoService::load() {
     storage.loadData(todoContainers);
 }
 
+void TodoService::clear() {
+    for (auto container : todoContainers) {
+        container.elements.clear();
+    }
+
+    todoContainers.clear();
+
+    for (size_t i = 0; i < 5; i++) {
+        todoContainers.emplace_back();
+    }
+}
+
 std::vector<std::vector<std::string>> TodoService::getTodoTable(int day) {
     std::vector<std::vector<std::string>> table;
 
