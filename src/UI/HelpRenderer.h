@@ -25,7 +25,18 @@ private:
     ScreenInteractive &screen;
     Component renderer;
 
+    std::string helpText = "Commands:\n"
+                           ":check [ID] -> Checks an todolist entry\n"
+                           ":uncheck [ID] -> Unchecks an todolist entry\n"
+                           ":delete [ID] -> Deletes an todolist entry\n"
+                           ":prio [ID] [Level 0 - 3] -> Sets the priority of an todolist entry\n"
+                           ":save -> Saves the current todolist to disk\n"
+                           ":help -> Opens this help page\n"
+                           "\n"
+                           "Leave this page with 'q'";
+
     Element refreshWindow();
+    bool handleRendererEvent(const Event &event);
 };
 
 

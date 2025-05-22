@@ -5,6 +5,7 @@
 #include "HelpRenderer.h"
 
 #include "ServiceContainer.h"
+#include "DTO/WindowState.h"
 
 HelpRenderer::HelpRenderer(ScreenInteractive &screen) : screen(screen) {
     auto component = Container::Stacked({
@@ -12,7 +13,8 @@ HelpRenderer::HelpRenderer(ScreenInteractive &screen) : screen(screen) {
             // todoInput,
         });
 
-    renderer = Renderer(component , [&] {return refreshWindow();});
+    renderer = Renderer(component , [&] { return refreshWindow(); });
+    renderer |= CatchEvent([&] (const Event &e) { return handleRendererEvent(e); });
 }
 
 Component HelpRenderer::getRenderer() {
@@ -25,6 +27,16 @@ Element HelpRenderer::refreshWindow() {
     }
 
     return window(text("TODO-Board | Help"), vbox({
-        separator(),
+        hbox(paragraph(helpText)),
     }));
+}
+
+bool HelpRenderer::handleRendererEvent(const Event &event) {
+    if (event == Event::Character('q')) {
+        ServiceContainer::windowStateHandler->switchWindow(WindowState::TODO);
+
+        return true;
+    }
+
+    return false;
 }
