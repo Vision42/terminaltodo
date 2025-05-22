@@ -6,6 +6,8 @@
 
 #include <strings.h>
 
+#include "DTO/WindowState.h"
+
 CommandProcessor::CommandProcessor() = default;
 
 CommandProcessor::CommandProcessor(const std::string &command, int day) {
@@ -62,6 +64,11 @@ void CommandProcessor::processTokenizedCommand() {
 
     if (tokens[0] == ":save") {
         save();
+        return;
+    }
+
+    if (tokens[0] == ":help") {
+        help();
     }
 }
 
@@ -83,4 +90,8 @@ void CommandProcessor::setPrio(int index, int prio) {
 
 void CommandProcessor::save() {
     ServiceContainer::todoService->save();
+}
+
+void CommandProcessor::help() {
+    ServiceContainer::windowStateHandler->switchWindow(WindowState::HELP);
 }

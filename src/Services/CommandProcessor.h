@@ -31,6 +31,7 @@ private:
     void uncheckTodo(int index);
     void setPrio(int index, int prio);
     void save();
+    void help();
 };
 
 

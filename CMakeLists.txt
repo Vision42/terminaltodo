@@ -16,7 +16,14 @@ add_library(todo-lib
         src/DTO/Priority.h
         src/Services/StorageService.cpp
         src/Services/StorageService.h
-        src/Interfaces/ISerializable.h)
+        src/Interfaces/ISerializable.h
+        src/UI/TodoRenderer.cpp
+        src/UI/TodoRenderer.h
+        src/DTO/WindowState.h
+        src/Services/WindowStateHandler.cpp
+        src/Services/WindowStateHandler.h
+        src/UI/HelpRenderer.cpp
+        src/UI/HelpRenderer.h)
 target_include_directories(todo-lib PUBLIC src)
 
 include(FetchContent)
