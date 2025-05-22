@@ -15,7 +15,8 @@ add_library(todo-lib
         src/DTO/TodoContainer.h
         src/DTO/Priority.h
         src/Services/StorageService.cpp
-        src/Services/StorageService.h)
+        src/Services/StorageService.h
+        src/Interfaces/ISerializable.h)
 target_include_directories(todo-lib PUBLIC src)
 
 include(FetchContent)

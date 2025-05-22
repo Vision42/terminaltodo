@@ -9,13 +9,15 @@
 #include <istream>
 #include <ostream>
 
-class TODOElement {
+#include "Interfaces/ISerializable.h"
+
+class TODOElement : public ISerializable {
 public:
     std::string priority;
     std::string content;
     bool completed = false;
 
-    void searialize(std::ostream &out) const {
+    void serialize(std::ostream &out) const override {
         size_t priorityLen = priority.size();
         out.write(reinterpret_cast<const char*>(&priorityLen), sizeof(priorityLen));
         out.write(priority.c_str(), priorityLen);
@@ -27,7 +29,7 @@ public:
         out.write(reinterpret_cast<const char*>(&completed), sizeof(completed));
     }
 
-    void deserialize(std::istream& in) {
+    void deserialize(std::istream& in) override {
         size_t priorityLen;
         in.read(reinterpret_cast<char*>(&priorityLen), sizeof(priorityLen));
         priority.resize(priorityLen);

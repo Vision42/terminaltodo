@@ -26,7 +26,7 @@ void StorageService::storeData(std::vector<TodoContainer> &todoContainers) {
         file.write(reinterpret_cast<const char*>(&elementSize), sizeof(elementSize));
 
         for (const auto &element: container.elements) {
-            element.searialize(file);
+            element.serialize(file);
         }
     }
 
@@ -59,7 +59,6 @@ void StorageService::loadData(std::vector<TodoContainer> &todoContainers) {
         todoContainers[i] = container;
     }
 
-    // file.read(reinterpret_cast<char*>(todoContainers.data()), sizeof(TodoContainer) * size);
     file.close();
 }
 
