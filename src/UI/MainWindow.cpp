@@ -5,9 +5,9 @@
 #include "MainWindow.h"
 
 #include "HelpRenderer.h"
+#include "PomodoroRenderer.h"
 #include "TodoRenderer.h"
 #include "DTO/WindowState.h"
-#include "ftxui/component/component_base.hpp"
 #include "Services/CommandProcessor.h"
 
 using namespace ftxui;
@@ -19,6 +19,7 @@ MainWindow::MainWindow() {
 void MainWindow::show(int window) {
     TodoRenderer todoRenderer(screen);
     HelpRenderer helpRenderer(screen);
+    PomodoroRenderer pomodoroRenderer(screen);
 
     switch (window) {
         case WindowState::TODO:
@@ -28,6 +29,10 @@ void MainWindow::show(int window) {
         case WindowState::HELP:
             ServiceContainer::windowStateHandler->setActiveWindow(window);
             screen.Loop(helpRenderer.getRenderer());
+            break;
+        case WindowState::POMO:
+            ServiceContainer::windowStateHandler->setActiveWindow(window);
+            screen.Loop(pomodoroRenderer.getRenderer());
             break;
     }
 

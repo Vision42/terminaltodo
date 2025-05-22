@@ -75,6 +75,10 @@ void CommandProcessor::processTokenizedCommand() {
     if (tokens[0] == ":clear") {
         clear();
     }
+
+    if (tokens[0] == ":pomo") {
+        pomo();
+    }
 }
 
 void CommandProcessor::deleteTodo(int index) {
@@ -103,4 +107,8 @@ void CommandProcessor::help() {
 
 void CommandProcessor::clear() {
     ServiceContainer::todoService->clear();
+}
+
+void CommandProcessor::pomo() {
+    ServiceContainer::windowStateHandler->switchWindow(WindowState::POMO);
 }

@@ -33,6 +33,7 @@ private:
     void save();
     void help();
     void clear();
+    void pomo();
 };
 
 

@@ -23,7 +23,10 @@ add_library(todo-lib
         src/Services/WindowStateHandler.cpp
         src/Services/WindowStateHandler.h
         src/UI/HelpRenderer.cpp
-        src/UI/HelpRenderer.h)
+        src/UI/HelpRenderer.h
+        src/UI/PomodoroRenderer.cpp
+        src/UI/PomodoroRenderer.h
+        src/UI/Renderer.h)
 target_include_directories(todo-lib PUBLIC src)
 
 include(FetchContent)

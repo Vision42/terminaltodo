@@ -9,6 +9,7 @@ class WindowState {
 public:
     static constexpr int TODO = 0;
     static constexpr int HELP = 1;
+    static constexpr int POMO = 3;
 };
 
 #endif //WINDOWSTATE_H
