@@ -41,9 +41,14 @@ std::string PomodoroRenderer::getElapsedTime() {
 
 bool PomodoroRenderer::handleSpacePress(const Event &e) {
     if (e == Event::Character(' ')) {
-        if (ServiceContainer::pomodoroService->clockRunning()) {
+        if (ServiceContainer::pomodoroService->clockRunning() && !ServiceContainer::pomodoroService->readyForNextPhase()) {
             timedRefresher.stop();
             ServiceContainer::pomodoroService->stopClock();
+            return true;
+        }
+
+        if (ServiceContainer::pomodoroService->readyForNextPhase()) {
+            ServiceContainer::pomodoroService->startClock();
             return true;
         }
 

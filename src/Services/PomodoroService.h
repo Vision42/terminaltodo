@@ -12,12 +12,14 @@ class PomodoroService {
 public:
     PomodoroService();
     void startClock();
+    void startNextPhase();
     void stopClock();
     void resetClock();
     void skipSection();
     std::string getElapsedTime();
     [[nodiscard]] std::string getCurrentPhase() const;
     [[nodiscard]] bool clockRunning() const;
+    [[nodiscard]] bool readyForNextPhase() const;
 
 private:
     const uint8_t POM_TIME = 25;

@@ -21,6 +21,11 @@ void PomodoroService::startClock() {
     running = true;
 }
 
+void PomodoroService::startNextPhase() {
+    currentPhase = targetPhase;
+    startClock();
+}
+
 void PomodoroService::stopClock() {
     running = false;
 }
@@ -72,6 +77,10 @@ void PomodoroService::checkPhases() {
 
 bool PomodoroService::clockRunning() const {
     return running;
+}
+
+bool PomodoroService::readyForNextPhase() const {
+    return currentPhase != targetPhase;
 }
 
 std::chrono::microseconds PomodoroService::getTimeToGo() const {
