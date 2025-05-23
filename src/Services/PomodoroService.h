@@ -20,7 +20,7 @@ public:
     [[nodiscard]] bool clockRunning() const;
 
 private:
-    const uint8_t POM_TIME = 1;
+    const uint8_t POM_TIME = 25;
     const uint8_t SHORT_BRAKE_TIME = 5;
     const uint8_t LONG_BRAKE_TIME = 10;
 
