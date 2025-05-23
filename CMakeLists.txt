@@ -45,12 +45,13 @@ FetchContent_Declare(ftxui
 )
 FetchContent_MakeAvailable(ftxui)
 
+find_package(SFML 2.5 COMPONENTS audio REQUIRED)
 target_link_libraries(todo-lib PUBLIC
         # Chose a submodule
         ftxui::component
         ftxui::dom
         ftxui::screen
-        SFML
+        sfml-audio
 )
 
 add_executable(todo src/main.cpp)

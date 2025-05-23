@@ -3,3 +3,17 @@
 //
 
 #include "AudioService.h"
+
+#include "StorageService.h"
+
+AudioService::AudioService() {
+    if (! notificationBuffer.loadFromFile(StorageService::getApplicationDirectory()  + TIME_UP_SOUND)) {
+        //TODO: Exception / logging
+        return;
+    }
+}
+
+void AudioService::playNotificationSound() {
+    sound.setBuffer(notificationBuffer);
+    sound.play();
+}

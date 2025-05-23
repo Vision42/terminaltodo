@@ -5,6 +5,7 @@
 #include "PomodoroService.h"
 
 #include "Formatter.h"
+#include "ServiceContainer.h"
 #include "DTO/PomodoroPhases.h"
 
 PomodoroService::PomodoroService() {
@@ -39,6 +40,7 @@ std::string PomodoroService::getElapsedTime() {
     auto duration = duration_cast<std::chrono::microseconds>(currentTime - startTime);
 
     elapsedTime = duration;
+    checkPhases();
 
     return Formatter::formatMicroseconds(getTimeToGo());
 }
@@ -56,11 +58,16 @@ std::string PomodoroService::getCurrentPhase() const {
 }
 
 void PomodoroService::checkPhases() {
-    if (getTimeToGo().count() < 0) {
-        // startTime = std::chrono::high_resolution_clock::now();
-        // elapsedTime = std::chrono::microseconds::zero();
-        targetPhase = currentPhase + 1 > PomodoroPhases::LONG_BRAKE ? PomodoroPhases::POMODORO : currentPhase + 1;
+    if (currentPhase != targetPhase) {
+        return;
     }
+
+    if (getTimeToGo().count() > 0) {
+        return;
+    }
+
+    targetPhase = currentPhase + 1 > PomodoroPhases::LONG_BRAKE ? PomodoroPhases::POMODORO : currentPhase + 1;
+    ServiceContainer::audioService->playNotificationSound();
 }
 
 bool PomodoroService::clockRunning() const {

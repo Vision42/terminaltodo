@@ -6,6 +6,7 @@
 #define SERVICECONTAINER_H
 #include <memory>
 
+#include "Services/AudioService.h"
 #include "Services/PomodoroService.h"
 #include "Services/TodoService.h"
 #include "Services/WindowStateHandler.h"
@@ -16,6 +17,7 @@ public:
     static std::shared_ptr<TodoService> todoService;
     static std::shared_ptr<WindowStateHandler> windowStateHandler;
     static std::shared_ptr<PomodoroService> pomodoroService;
+    static std::shared_ptr<AudioService> audioService;
 
     static void initialize();
     ServiceContainer() = delete;

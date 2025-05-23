@@ -17,10 +17,10 @@ public:
     StorageService();
     void storeData(std::vector<TodoContainer> &todoContainers);
     void loadData(std::vector<TodoContainer> &todoContainers);
+    static std::string getApplicationDirectory();
 
 private:
     const std::string fileName{"store"};
-    std::string getApplicationDirectory();
 };
 
 
