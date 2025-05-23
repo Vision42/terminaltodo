@@ -32,7 +32,10 @@ add_library(todo-lib
         src/Services/TimedScreenRefresher.cpp
         src/Services/TimedScreenRefresher.h
         src/Services/Formatter.cpp
-        src/Services/Formatter.h)
+        src/Services/Formatter.h
+        src/DTO/PomodoroPhases.h
+        src/Services/AudioService.cpp
+        src/Services/AudioService.h)
 target_include_directories(todo-lib PUBLIC src)
 
 include(FetchContent)
@@ -47,6 +50,7 @@ target_link_libraries(todo-lib PUBLIC
         ftxui::component
         ftxui::dom
         ftxui::screen
+        SFML
 )
 
 add_executable(todo src/main.cpp)

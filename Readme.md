@@ -1,0 +1,2 @@
+# Needed libs:
+- libsfml-dev
