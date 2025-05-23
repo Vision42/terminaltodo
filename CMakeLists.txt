@@ -26,7 +26,13 @@ add_library(todo-lib
         src/UI/HelpRenderer.h
         src/UI/PomodoroRenderer.cpp
         src/UI/PomodoroRenderer.h
-        src/UI/Renderer.h)
+        src/UI/Renderer.h
+        src/Services/PomodoroService.cpp
+        src/Services/PomodoroService.h
+        src/Services/TimedScreenRefresher.cpp
+        src/Services/TimedScreenRefresher.h
+        src/Services/Formatter.cpp
+        src/Services/Formatter.h)
 target_include_directories(todo-lib PUBLIC src)
 
 include(FetchContent)

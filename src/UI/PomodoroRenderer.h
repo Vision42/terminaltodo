@@ -8,8 +8,11 @@
 #include <ftxui/component/screen_interactive.hpp>
 #include <ftxui/dom/elements.hpp>
 #include "ftxui/component/component.hpp"
+#include <string>
 
 #include "Renderer.h"
+#include "DTO/WindowState.h"
+#include "Services/TimedScreenRefresher.h"
 
 using namespace ftxui;
 
@@ -19,11 +22,15 @@ public:
     PomodoroRenderer(ScreenInteractive &screen);
 
 private:
+    TimedScreenRefresher timedRefresher;
+
     Component btnReset = Button("Reset timer", [&] {
         resetTimer();
     });
 
     Element refreshWindow();
+    bool handleSpacePress(const Event &e);
+    std::string getElapsedTime();
     void resetTimer();
 };
 

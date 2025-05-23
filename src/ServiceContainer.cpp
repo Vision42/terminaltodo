@@ -6,8 +6,10 @@
 
 std::shared_ptr<TodoService> ServiceContainer::todoService = nullptr;
 std::shared_ptr<WindowStateHandler> ServiceContainer::windowStateHandler = nullptr;
+std::shared_ptr<PomodoroService> ServiceContainer::pomodoroService = nullptr;
 
 void ServiceContainer::initialize() {
     todoService = std::make_shared<TodoService>();
     windowStateHandler = std::make_shared<WindowStateHandler>();
+    pomodoroService = std::make_shared<PomodoroService>();
 }

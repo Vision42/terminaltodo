@@ -6,12 +6,13 @@
 
 #include "ServiceContainer.h"
 
-PomodoroRenderer::PomodoroRenderer(ScreenInteractive &screen): Renderer(screen) {
+PomodoroRenderer::PomodoroRenderer(ScreenInteractive &screen): Renderer(screen), timedRefresher(screen, 500, WindowState::POMO) {
     auto component = Container::Stacked({
             btnReset,
         });
 
     renderer = ftxui::Renderer(component , [&] { return refreshWindow(); });
+    renderer |= CatchEvent([&] (const Event &event) { return handleSpacePress(event); } );
 }
 
 Element PomodoroRenderer::refreshWindow() {
@@ -20,7 +21,7 @@ Element PomodoroRenderer::refreshWindow() {
     }
 
     return window(text("TODO-Board | Pomodoro"), vbox({
-        hbox(text("20:10") | bold | center | flex),
+        hbox(text(getElapsedTime()) | bold | center | flex),
         separator(),
         hbox(gauge(0.5) | flex),
         separator(),
@@ -28,6 +29,27 @@ Element PomodoroRenderer::refreshWindow() {
         separator(),
         hbox(btnReset->Render() | center| flex)
     }));
+}
+
+std::string PomodoroRenderer::getElapsedTime() {
+    return ServiceContainer::pomodoroService->getElapsedTime();
+}
+
+bool PomodoroRenderer::handleSpacePress(const Event &e) {
+    if (e == Event::Character(' ')) {
+        if (ServiceContainer::pomodoroService->clockRunning()) {
+            timedRefresher.stop();
+            ServiceContainer::pomodoroService->stopClock();
+            return true;
+        }
+
+        timedRefresher.start();
+        ServiceContainer::pomodoroService->startClock();
+
+        return true;
+    }
+
+    return false;
 }
 
 void PomodoroRenderer::resetTimer() {
