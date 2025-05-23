@@ -29,7 +29,7 @@ void PomodoroService::skipSection() {
 
 std::string PomodoroService::getElapsedTime() {
     if (! running) {
-        return std::to_string(elapsedTime.count());
+        return Formatter::formatMicroseconds(elapsedTime);
     }
 
     auto currentTime = std::chrono::high_resolution_clock::now();
