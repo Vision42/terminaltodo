@@ -29,7 +29,7 @@ void PomodoroService::skipSection() {
 
 std::string PomodoroService::getElapsedTime() {
     if (! running) {
-        return Formatter::formatMicroseconds(elapsedTime);
+        return Formatter::formatMicroseconds(getTimeToGo());
     }
 
     auto currentTime = std::chrono::high_resolution_clock::now();
@@ -37,13 +37,21 @@ std::string PomodoroService::getElapsedTime() {
 
     elapsedTime = duration;
 
-    return Formatter::formatMicroseconds(elapsedTime);
+    return Formatter::formatMicroseconds(getTimeToGo());
 }
 
 std::string PomodoroService::getCurrentPhase() {
     return "not implemented";
 }
 
-bool PomodoroService::clockRunning() {
+bool PomodoroService::clockRunning() const {
     return running;
+}
+
+std::chrono::microseconds PomodoroService::getTimeToGo() const {
+    return std::chrono::duration_cast<std::chrono::microseconds>(getTimespanForCurrentPhase() - elapsedTime);
+}
+
+std::chrono::microseconds PomodoroService::getTimespanForCurrentPhase() const {
+    return std::chrono::microseconds{static_cast<long>(POM_TIME * 6e7)};
 }
