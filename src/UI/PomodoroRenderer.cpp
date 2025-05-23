@@ -25,7 +25,11 @@ Element PomodoroRenderer::refreshWindow() {
         separator(),
         hbox(gauge(0.5) | flex),
         separator(),
-        hbox(text("Round: 4") | center | flex, text("Next pause: 5 min") | center | flex),
+        hbox(
+            text("Round: 4") | center | flex,
+            text("Current phase: " + ServiceContainer::pomodoroService->getCurrentPhase()) | center | flex,
+            text("Next pause: 5 min") | center | flex
+        ),
         separator(),
         hbox(btnReset->Render() | center| flex)
     }));
