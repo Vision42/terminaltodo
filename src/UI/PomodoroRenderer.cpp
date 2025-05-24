@@ -9,6 +9,7 @@
 PomodoroRenderer::PomodoroRenderer(ScreenInteractive &screen): Renderer(screen), timedRefresher(screen, 500, WindowState::POMO) {
     auto component = Container::Stacked({
             btnReset,
+            btnSkipPhase,
         });
 
     renderer = ftxui::Renderer(component , [&] { return refreshWindow(); });
@@ -31,7 +32,7 @@ Element PomodoroRenderer::refreshWindow() {
             text("Next phase: " + ServiceContainer::pomodoroService->getNextPhase()) | center | flex
         ),
         separator(),
-        hbox(btnReset->Render() | center| flex)
+        hbox(btnReset->Render() | center| flex, btnSkipPhase->Render() | center | flex),
     }));
 }
 
@@ -62,4 +63,8 @@ bool PomodoroRenderer::handleSpacePress(const Event &e) {
 }
 
 void PomodoroRenderer::resetTimer() {
+}
+
+void PomodoroRenderer::skipPhase() {
+    ServiceContainer::pomodoroService->skipPhase();
 }

@@ -38,7 +38,9 @@ void PomodoroService::stopClock() {
 void PomodoroService::resetClock() {
 }
 
-void PomodoroService::skipSection() {
+void PomodoroService::skipPhase() {
+    moveToNextPhase();
+    startNextPhase();
 }
 
 std::string PomodoroService::getElapsedTime() {
@@ -73,8 +75,11 @@ void PomodoroService::checkPhases() {
     }
 
     ServiceContainer::audioService->playNotificationSound();
+    moveToNextPhase();
+}
 
-    if (currentPhase == PomodoroPhases::SHORT_BRAKE) {
+void PomodoroService::moveToNextPhase() {
+    if (currentPhase == PomodoroPhases::SHORT_BRAKE || currentPhase == PomodoroPhases::LONG_BRAKE) {
         targetPhase = PomodoroPhases::POMODORO;
         return;
     }

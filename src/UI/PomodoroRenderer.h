@@ -27,11 +27,15 @@ private:
     Component btnReset = Button("Reset timer", [&] {
         resetTimer();
     });
+    Component btnSkipPhase = Button("Skip phase", [&] {
+        skipPhase();
+    });
 
     Element refreshWindow();
     bool handleSpacePress(const Event &e);
     std::string getElapsedTime();
     void resetTimer();
+    static void skipPhase();
 };
 
 
