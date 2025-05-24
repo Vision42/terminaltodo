@@ -26,7 +26,7 @@ Element PomodoroRenderer::refreshWindow() {
         hbox(gauge(0.5) | flex),
         separator(),
         hbox(
-            text("Round: 4") | center | flex,
+            text("Cycles: " + std::to_string(ServiceContainer::pomodoroService->getCycles())) | center | flex,
             text("Current phase: " + ServiceContainer::pomodoroService->getCurrentPhase()) | center | flex,
             text("Next pause: 5 min") | center | flex
         ),
@@ -48,7 +48,7 @@ bool PomodoroRenderer::handleSpacePress(const Event &e) {
         }
 
         if (ServiceContainer::pomodoroService->readyForNextPhase()) {
-            ServiceContainer::pomodoroService->startClock();
+            ServiceContainer::pomodoroService->startNextPhase();
             return true;
         }
 

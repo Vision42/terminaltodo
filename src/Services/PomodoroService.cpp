@@ -14,6 +14,7 @@ PomodoroService::PomodoroService() {
     running = false;
     currentPhase = PomodoroPhases::POMODORO;
     targetPhase = PomodoroPhases::POMODORO;
+    cycles = 1;
 }
 
 void PomodoroService::startClock() {
@@ -22,6 +23,10 @@ void PomodoroService::startClock() {
 }
 
 void PomodoroService::startNextPhase() {
+    if (currentPhase != PomodoroPhases::POMODORO) {
+        cycles++;
+    }
+
     currentPhase = targetPhase;
     startClock();
 }
@@ -71,8 +76,19 @@ void PomodoroService::checkPhases() {
         return;
     }
 
-    targetPhase = currentPhase + 1 > PomodoroPhases::LONG_BRAKE ? PomodoroPhases::POMODORO : currentPhase + 1;
     ServiceContainer::audioService->playNotificationSound();
+
+    if (currentPhase == PomodoroPhases::SHORT_BRAKE) {
+        targetPhase = PomodoroPhases::POMODORO;
+        return;
+    }
+
+    if (cycles % 4 == 0 && currentPhase == PomodoroPhases::POMODORO) {
+        targetPhase = PomodoroPhases::LONG_BRAKE;
+        return;
+    }
+
+    targetPhase = PomodoroPhases::SHORT_BRAKE;
 }
 
 bool PomodoroService::clockRunning() const {
@@ -83,10 +99,19 @@ bool PomodoroService::readyForNextPhase() const {
     return currentPhase != targetPhase;
 }
 
+int PomodoroService::getCycles() const {
+    return cycles;
+}
+
 std::chrono::microseconds PomodoroService::getTimeToGo() const {
     return std::chrono::duration_cast<std::chrono::microseconds>(getTimespanForCurrentPhase() - elapsedTime);
 }
 
 std::chrono::microseconds PomodoroService::getTimespanForCurrentPhase() const {
-    return std::chrono::microseconds{static_cast<long>(POM_TIME * 6e7)};
+    switch (currentPhase) {
+        case PomodoroPhases::POMODORO: return std::chrono::microseconds{static_cast<long>(POM_TIME * 6e7)};
+        case PomodoroPhases::SHORT_BRAKE: return std::chrono::microseconds{static_cast<long>(SHORT_BRAKE_TIME * 6e7)};
+        case PomodoroPhases::LONG_BRAKE: return std::chrono::microseconds{static_cast<long>(LONG_BRAKE_TIME * 6e7)};
+        default: return std::chrono::microseconds{0};
+    }
 }

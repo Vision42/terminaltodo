@@ -20,6 +20,7 @@ public:
     [[nodiscard]] std::string getCurrentPhase() const;
     [[nodiscard]] bool clockRunning() const;
     [[nodiscard]] bool readyForNextPhase() const;
+    [[nodiscard]] int getCycles() const;
 
 private:
     const uint8_t POM_TIME = 25;
@@ -28,6 +29,7 @@ private:
 
     int currentPhase;
     int targetPhase;
+    int cycles;
 
     std::chrono::time_point<std::chrono::system_clock> startTime;
     std::chrono::microseconds elapsedTime{};
