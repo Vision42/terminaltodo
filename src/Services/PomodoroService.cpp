@@ -56,15 +56,11 @@ std::string PomodoroService::getElapsedTime() {
 }
 
 std::string PomodoroService::getCurrentPhase() const {
-    switch (currentPhase) {
-        case PomodoroPhases::POMODORO:
-            return "Pomodoro";
-        case PomodoroPhases::SHORT_BRAKE:
-            return "Short brake";
-        case PomodoroPhases::LONG_BRAKE:
-            return "Long brake";
-        default: return "";
-    }
+    return getPhaseLabel(currentPhase);
+}
+
+std::string PomodoroService::getNextPhase() const {
+    return getPhaseLabel(currentPhase + 1 <= PomodoroPhases::LONG_BRAKE ? currentPhase + 1 : PomodoroPhases::POMODORO);
 }
 
 void PomodoroService::checkPhases() {
@@ -113,5 +109,17 @@ std::chrono::microseconds PomodoroService::getTimespanForCurrentPhase() const {
         case PomodoroPhases::SHORT_BRAKE: return std::chrono::microseconds{static_cast<long>(SHORT_BRAKE_TIME * 6e7)};
         case PomodoroPhases::LONG_BRAKE: return std::chrono::microseconds{static_cast<long>(LONG_BRAKE_TIME * 6e7)};
         default: return std::chrono::microseconds{0};
+    }
+}
+
+std::string PomodoroService::getPhaseLabel(int phase) {
+    switch (phase) {
+        case PomodoroPhases::POMODORO:
+            return "Pomodoro";
+        case PomodoroPhases::SHORT_BRAKE:
+            return "Short brake";
+        case PomodoroPhases::LONG_BRAKE:
+            return "Long brake";
+        default: return "";
     }
 }

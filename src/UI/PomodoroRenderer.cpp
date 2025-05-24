@@ -28,7 +28,7 @@ Element PomodoroRenderer::refreshWindow() {
         hbox(
             text("Cycles: " + std::to_string(ServiceContainer::pomodoroService->getCycles())) | center | flex,
             text("Current phase: " + ServiceContainer::pomodoroService->getCurrentPhase()) | center | flex,
-            text("Next pause: 5 min") | center | flex
+            text("Next phase: " + ServiceContainer::pomodoroService->getNextPhase()) | center | flex
         ),
         separator(),
         hbox(btnReset->Render() | center| flex)

@@ -18,6 +18,7 @@ public:
     void skipSection();
     std::string getElapsedTime();
     [[nodiscard]] std::string getCurrentPhase() const;
+    [[nodiscard]] std::string getNextPhase() const;
     [[nodiscard]] bool clockRunning() const;
     [[nodiscard]] bool readyForNextPhase() const;
     [[nodiscard]] int getCycles() const;
@@ -38,6 +39,7 @@ private:
     void checkPhases();
     [[nodiscard]] std::chrono::microseconds getTimeToGo() const;
     [[nodiscard]] std::chrono::microseconds getTimespanForCurrentPhase() const;
+    [[nodiscard]] static std::string getPhaseLabel(int phase) ;
 };
 
 
