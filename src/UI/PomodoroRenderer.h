@@ -34,7 +34,7 @@ private:
     Element refreshWindow();
     bool handleSpacePress(const Event &e);
     std::string getElapsedTime();
-    void resetTimer();
+    static void resetTimer();
     static void skipPhase();
 };
 

@@ -36,6 +36,12 @@ void PomodoroService::stopClock() {
 }
 
 void PomodoroService::resetClock() {
+    startTime = {};
+    elapsedTime = std::chrono::microseconds::zero();
+    currentPhase = PomodoroPhases::POMODORO;
+    targetPhase = PomodoroPhases::POMODORO;
+    running = false;
+    cycles = 1;
 }
 
 void PomodoroService::skipPhase() {

@@ -63,6 +63,7 @@ bool PomodoroRenderer::handleSpacePress(const Event &e) {
 }
 
 void PomodoroRenderer::resetTimer() {
+    ServiceContainer::pomodoroService->resetClock();
 }
 
 void PomodoroRenderer::skipPhase() {
