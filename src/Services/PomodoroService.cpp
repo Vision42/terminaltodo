@@ -110,6 +110,11 @@ int PomodoroService::getCycles() const {
     return cycles;
 }
 
+float PomodoroService::getProgress() const {
+    //TODO: FIXME
+    return static_cast<float>(getTimeToGo().count() / getTimespanForCurrentPhase().count());
+}
+
 std::chrono::microseconds PomodoroService::getTimeToGo() const {
     return std::chrono::duration_cast<std::chrono::microseconds>(getTimespanForCurrentPhase() - elapsedTime);
 }

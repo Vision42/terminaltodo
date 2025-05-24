@@ -24,7 +24,7 @@ Element PomodoroRenderer::refreshWindow() {
     return window(text("TODO-Board | Pomodoro"), vbox({
         hbox(text(getElapsedTime()) | bold | center | flex),
         separator(),
-        hbox(gauge(0.5) | flex),
+        hbox(gauge(ServiceContainer::pomodoroService->getProgress()) | flex),
         separator(),
         hbox(
             text("Cycles: " + std::to_string(ServiceContainer::pomodoroService->getCycles())) | center | flex,
