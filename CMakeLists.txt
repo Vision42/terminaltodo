@@ -67,6 +67,7 @@ enable_testing()
 add_executable(todo-test
         tests/ServiceContainerTest.cpp
         tests/Services/TodoServiceTest.cpp
+        tests/Services/FormatterTest.cpp
 )
 
 target_link_libraries(todo-test GTest::gtest_main GTest::gmock_main todo-lib)
