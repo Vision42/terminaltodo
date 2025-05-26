@@ -57,3 +57,18 @@ target_link_libraries(todo-lib PUBLIC
 add_executable(todo src/main.cpp)
 target_link_libraries(todo todo-lib)
 add_dependencies(todo todo-lib)
+
+
+include(InstallRequiredSystemLibraries)
+
+set(CPACK_PACKAGE_NAME "TerminalTODO")
+set(CPACK_PACKAGE_VERSION "0.1.0")
+set(CPACK_PACKAGE_CONTACT "p.limmer@limmer-laboratories.com")
+set(CPACK_DEBIAN_PACKAGE_MAINTAINER "Philipp Limmer")
+set(CPACK_PACKAGE_DESCRIPTION "A simple terminal todo application")
+set(CPACK_GENERATOR "DEB")
+
+include(CPack)
+
+install(TARGETS todo DESTINATION bin)
+install(FILES res/timeup.ogg DESTINATION ~/opt/terminaltodo)

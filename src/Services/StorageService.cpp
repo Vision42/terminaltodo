@@ -71,5 +71,5 @@ std::string StorageService::getApplicationDirectory() {
 
     //TODO: Exception handling
 
-    return (homeDir ? std::string(homeDir) + "/opt/tuitodo/" : "");
+    return (homeDir ? std::string(homeDir) + "/opt/terminaltodo/" : "");
 }
