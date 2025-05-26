@@ -65,12 +65,21 @@ target_sources(todo-lib PRIVATE ${simpleini_SOURCE_DIR}/ConvertUTF.c)
 target_include_directories(todo-lib PUBLIC ${simpleini_SOURCE_DIR})
 
 find_package(SFML 2.5 COMPONENTS audio REQUIRED)
+find_package(Boost REQUIRED COMPONENTS log log_setup thread filesystem system)
+
 target_link_libraries(todo-lib PUBLIC
         # Chose a submodule
         ftxui::component
         ftxui::dom
         ftxui::screen
+
         sfml-audio
+
+        Boost::log
+        Boost::log_setup
+        Boost::thread
+        Boost::filesystem
+        Boost::system
 )
 
 add_executable(todo src/main.cpp)
