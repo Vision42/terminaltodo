@@ -11,22 +11,23 @@
 #include "DTO/TodoContainer.h"
 #include "DTO/TODOElement.h"
 #include "DTO/Priority.h"
+#include "Interfaces/ITodoService.h"
 
-class TodoService {
+class TodoService : public ITodoService {
 public:
     TodoService();
 
-    void addTodo(const std::string &content, int day);
-    void deleteTodo(int index, int day);
-    void checkTodo(int index, int day);
-    void uncheckTodo(int index, int day);
-    void setPrio(int index, int day, int prio);
-    void save();
-    void load();
-    void clear();
-    std::vector<std::vector<std::string>> getTodoTable(int day);
+    void addTodo(const std::string &content, int day) override;
+    void deleteTodo(int index, int day) override;
+    void checkTodo(int index, int day) override;
+    void uncheckTodo(int index, int day) override;
+    void setPrio(int index, int day, int prio) override;
+    void save() override;
+    void load() override;
+    void clear() override;
+    std::vector<std::vector<std::string>> getTodoTable(int day) override;
 
-    ~TodoService();
+    ~TodoService() override;
 
 private:
     std::vector<TodoContainer> todoContainers;

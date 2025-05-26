@@ -5,15 +5,15 @@
 #ifndef WINDOWSTATEHANDLER_H
 #define WINDOWSTATEHANDLER_H
 
+#include "Interfaces/IWindowStateHandler.h"
 
-
-class WindowStateHandler {
+class WindowStateHandler : public IWindowStateHandler {
 public:
     WindowStateHandler();
-    void switchWindow(int targetWindow);
-    void setActiveWindow(int window);
-    bool shouldSwitchWindow();
-    int getTargetWindow();
+    void switchWindow(int targetWindow) override;
+    void setActiveWindow(int window) override;
+    bool shouldSwitchWindow() override;
+    int getTargetWindow() override;
 
 private:
     int currentWindow;

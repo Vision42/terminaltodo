@@ -6,7 +6,7 @@
 
 StorageService::StorageService() {
     if (! std::filesystem::is_directory(getApplicationDirectory())) {
-        std::filesystem::create_directory(getApplicationDirectory());
+        std::filesystem::create_directories(getApplicationDirectory());
     }
 }
 

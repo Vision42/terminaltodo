@@ -4,8 +4,8 @@
 
 #include "ServiceContainer.h"
 
-std::shared_ptr<TodoService> ServiceContainer::todoService = nullptr;
-std::shared_ptr<WindowStateHandler> ServiceContainer::windowStateHandler = nullptr;
+std::shared_ptr<ITodoService> ServiceContainer::todoService = nullptr;
+std::shared_ptr<IWindowStateHandler> ServiceContainer::windowStateHandler = nullptr;
 std::shared_ptr<PomodoroService> ServiceContainer::pomodoroService = nullptr;
 std::shared_ptr<AudioService> ServiceContainer::audioService = nullptr;
 
