@@ -14,8 +14,8 @@
 
 class ServiceContainer {
 public:
-    static std::shared_ptr<TodoService> todoService;
-    static std::shared_ptr<WindowStateHandler> windowStateHandler;
+    static std::shared_ptr<ITodoService> todoService;
+    static std::shared_ptr<IWindowStateHandler> windowStateHandler;
     static std::shared_ptr<PomodoroService> pomodoroService;
     static std::shared_ptr<AudioService> audioService;
 

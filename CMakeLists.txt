@@ -35,7 +35,9 @@ add_library(todo-lib
         src/Services/Formatter.h
         src/DTO/PomodoroPhases.h
         src/Services/AudioService.cpp
-        src/Services/AudioService.h)
+        src/Services/AudioService.h
+        src/Interfaces/ITodoService.h
+        src/Interfaces/IWindowStateHandler.h)
 target_include_directories(todo-lib PUBLIC src)
 
 include(FetchContent)
@@ -68,6 +70,10 @@ add_executable(todo-test
         tests/ServiceContainerTest.cpp
         tests/Services/TodoServiceTest.cpp
         tests/Services/FormatterTest.cpp
+        tests/Services/PomodoroServiceTest.cpp
+        tests/Services/CommandProcessorTest.cpp
+        tests/Services/StorageServiceTest.cpp
+        tests/Services/WindowStateHandlerTest.cpp
 )
 
 target_link_libraries(todo-test GTest::gtest_main GTest::gmock_main todo-lib)
