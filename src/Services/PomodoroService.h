@@ -25,9 +25,9 @@ public:
     [[nodiscard]] float getProgress() const;
 
 private:
-    const uint8_t POM_TIME = 25;
-    const uint8_t SHORT_BRAKE_TIME = 5;
-    const uint8_t LONG_BRAKE_TIME = 10;
+    uint8_t POM_TIME = 25;
+    uint8_t SHORT_BRAKE_TIME = 5;
+    uint8_t LONG_BRAKE_TIME = 10;
 
     int currentPhase;
     int targetPhase;

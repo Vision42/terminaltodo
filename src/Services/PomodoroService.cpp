@@ -15,6 +15,10 @@ PomodoroService::PomodoroService() {
     currentPhase = PomodoroPhases::POMODORO;
     targetPhase = PomodoroPhases::POMODORO;
     cycles = 1;
+
+    POM_TIME = std::stoi(ServiceContainer::configService->getValue("POMODORO", "pomodoro_time", "25"));
+    SHORT_BRAKE_TIME = std::stoi(ServiceContainer::configService->getValue("POMODORO", "short_brake_time", "5"));
+    LONG_BRAKE_TIME = std::stoi(ServiceContainer::configService->getValue("POMODORO", "short_brake_time", "10"));
 }
 
 void PomodoroService::startClock() {

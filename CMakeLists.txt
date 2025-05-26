@@ -37,7 +37,10 @@ add_library(todo-lib
         src/Services/AudioService.cpp
         src/Services/AudioService.h
         src/Interfaces/ITodoService.h
-        src/Interfaces/IWindowStateHandler.h)
+        src/Interfaces/IWindowStateHandler.h
+        src/Interfaces/IConfigService.h
+        src/Services/ConfigService.cpp
+        src/Services/ConfigService.h)
 target_include_directories(todo-lib PUBLIC src)
 
 include(FetchContent)
@@ -46,11 +49,20 @@ FetchContent_Declare(ftxui
         GIT_TAG v6.1.9
 )
 FetchContent_Declare(
+        simpleini
+        GIT_REPOSITORY https://github.com/brofield/simpleini.git
+        GIT_TAG v4.22
+)
+FetchContent_Declare(
         googletest
         URL https://github.com/google/googletest/archive/03597a01ee50ed33e9dfd640b249b4be3799d395.zip
 )
 FetchContent_MakeAvailable(ftxui)
 FetchContent_MakeAvailable(googletest)
+FetchContent_MakeAvailable(simpleini)
+
+target_sources(todo-lib PRIVATE ${simpleini_SOURCE_DIR}/ConvertUTF.c)
+target_include_directories(todo-lib PUBLIC ${simpleini_SOURCE_DIR})
 
 find_package(SFML 2.5 COMPONENTS audio REQUIRED)
 target_link_libraries(todo-lib PUBLIC
@@ -76,6 +88,7 @@ add_executable(todo-test
         tests/Services/CommandProcessorTest.cpp
         tests/Services/StorageServiceTest.cpp
         tests/Services/WindowStateHandlerTest.cpp
+        tests/Services/ConfigServiceTest.cpp
 )
 
 target_link_libraries(todo-test GTest::gtest_main GTest::gmock_main todo-lib)
@@ -98,3 +111,4 @@ include(CPack)
 
 install(TARGETS todo DESTINATION bin)
 install(FILES res/timeup.ogg DESTINATION ~/opt/terminaltodo)
+install(FILES res/config.ini DESTINATION ~/opt/terminaltodo)
