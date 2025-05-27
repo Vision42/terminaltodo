@@ -52,7 +52,12 @@ void TodoService::save() {
 
 void TodoService::load() {
     StorageService storage;
-    storage.loadData(todoContainers);
+
+    try {
+        storage.loadData(todoContainers);
+    } catch (const std::exception &e) {
+        return;
+    }
 }
 
 void TodoService::clear() {

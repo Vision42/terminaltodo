@@ -3,6 +3,7 @@
 //
 
 #include "StorageService.h"
+#include "Exceptions/IOException.h"
 
 StorageService::StorageService() {
     if (! std::filesystem::is_directory(getApplicationDirectory())) {
@@ -10,12 +11,14 @@ StorageService::StorageService() {
     }
 }
 
-void StorageService::storeData(std::vector<TodoContainer> &todoContainers) {
+/**
+ * @throws IOException
+ */
+void StorageService::storeData(const std::vector<TodoContainer> &todoContainers) const {
     std::ofstream file(getApplicationDirectory() + fileName, std::ios::binary);
 
     if (! file.is_open()) {
-        std::cerr << "Failed to open file " << getApplicationDirectory() + fileName << std::endl;
-        std::exit(-20);
+        throw IOException("Failed to open file " + getApplicationDirectory() + fileName);
     }
 
     size_t size = todoContainers.size();
@@ -33,12 +36,11 @@ void StorageService::storeData(std::vector<TodoContainer> &todoContainers) {
     file.close();
 }
 
-void StorageService::loadData(std::vector<TodoContainer> &todoContainers) {
+void StorageService::loadData(std::vector<TodoContainer> &todoContainers) const {
     std::ifstream file(getApplicationDirectory() + fileName, std::ios::binary);
 
     if (! file.is_open()) {
-        //TODO: Exception
-        return;
+        throw IOException("Failed to load file " + getApplicationDirectory() + fileName);
     }
 
     size_t size;

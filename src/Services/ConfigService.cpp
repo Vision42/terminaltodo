@@ -4,6 +4,7 @@
 
 #include "ConfigService.h"
 #include "StorageService.h"
+#include "Exceptions/IOException.h"
 
 ConfigService::ConfigService() {
     config.SetUnicode();
@@ -19,6 +20,6 @@ void ConfigService::writeValue(const std::string section, const std::string key,
 
     auto result = config.SaveFile((StorageService::getApplicationDirectory() + configFile).c_str());
     if (result < 0) {
-        //TODO: Exception handling
+        throw IOException("Error writing config file. Code: " + result);
     }
 }

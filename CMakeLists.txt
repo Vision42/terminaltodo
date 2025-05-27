@@ -40,7 +40,8 @@ add_library(todo-lib
         src/Interfaces/IWindowStateHandler.h
         src/Interfaces/IConfigService.h
         src/Services/ConfigService.cpp
-        src/Services/ConfigService.h)
+        src/Services/ConfigService.h
+        src/Exceptions/IOException.h)
 target_include_directories(todo-lib PUBLIC src)
 
 include(FetchContent)

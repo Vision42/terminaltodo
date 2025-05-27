@@ -16,8 +16,8 @@
 class StorageService {
 public:
     StorageService();
-    void storeData(std::vector<TodoContainer> &todoContainers);
-    void loadData(std::vector<TodoContainer> &todoContainers);
+    void storeData(const std::vector<TodoContainer> &todoContainers) const;
+    void loadData(std::vector<TodoContainer> &todoContainers) const;
     static std::string getApplicationDirectory();
 
 private:

@@ -5,11 +5,11 @@
 #include "AudioService.h"
 
 #include "StorageService.h"
+#include "Exceptions/IOException.h"
 
 AudioService::AudioService() {
     if (! notificationBuffer.loadFromFile(StorageService::getApplicationDirectory()  + TIME_UP_SOUND)) {
-        //TODO: Exception / logging
-        return;
+        throw IOException("Failed to load notification audio buffer");
     }
 }
 
